@@ -4,10 +4,12 @@
   <thead>
     <tr>
       <th>Title</th>
+      <!--
       <th>Artist</th>
       <th>Album</th>
       <th>Time</th>
       <th>Genre</th>
+      !-->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +18,12 @@
     <% @songs.each do |song| %>
       <tr>
         <td><%= song.title %></td>
+        <!--
         <td><%= song.artist %></td>
         <td><%= song.album %></td>
         <td><%= song.time %></td>
         <td><%= song.genre %></td>
+        !-->
         <td>
           <% if song.playlist %>
             <%= song.playlist.title %>
