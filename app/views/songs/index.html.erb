@@ -8,6 +8,7 @@
       <th>Album</th>
       <th>Time</th>
       <th>Genre</th>
+      <th>Playlist</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +22,7 @@
         <td><%= song.time %></td>
         <td><%= song.genre %></td>
         <td>
-          <% if song.playlists %>
+          <% if song.playlist %>
             <%= song.playlist.title %>
           <% else %>
             No Playlist 

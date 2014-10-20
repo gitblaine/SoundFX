@@ -8,12 +8,23 @@
 <% if @playlist.songs.empty? %>
 No Songs!
 
-	<% else %>
-		<% @playlist.songs.each do |song| %>
+<% else %>
+	<% @playlist.songs.each do |song| %>
 		Title: <%= song.title %><br />
 	<% end %>
 <% end %>
 
+<div class="row">
+  <ul id="soundcloud-results-pl">
+    
+  </ul>
+</div>
+
+<div id="hidden" style="display: none;">
+	<% @playlist.songs.each do |song| %>
+		URL: <%= song.soundcloud_permalink %>
+	<% end %>
+</div>
 
 <%= link_to 'Edit', edit_playlist_path(@playlist) %> |
 <%= link_to 'Back', playlists_path %>
