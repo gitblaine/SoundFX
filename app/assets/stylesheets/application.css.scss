@@ -16,3 +16,12 @@
 
 @import "foundation_and_overrides";
 /* Add imports of custom sass/scss files here */
+
+li.player-list-item {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.player-list-item .td.player .buy-link {
+  display:none;
+}

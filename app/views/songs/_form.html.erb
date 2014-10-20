@@ -1,3 +1,38 @@
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <div class="row collapse field">
+      <div class="small-10 columns">
+        <input type="text" id="soundcloud-search" placeholder="Search Soundcloud">
+      </div>
+      <div class="small-2 columns">
+        <a href="#" class="button postfix" id="soundcloud-search-btn">Search</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <ul id="soundcloud-results">
+    
+  </ul>
+</div>
+
+<!-- <div class='row'>
+  <div class='small-12 large-6 columns'>
+    <div class='field'>
+      <label for='soundcloud-search'>Search Soundcloud</label>
+        <input id='soundlocud-search' type='text' name='sc-search'/>
+          <button id = 'soundcloud-search-btn'>Search</button>
+    </div>
+  </div>
+</div> -->
+
+<div class='row'>
+  <ul id='soundcloud-results'>
+
+  </ul>
+</div>  
+</div>
 <%= form_for(@song) do |f| %>
   <% if @song.errors.any? %>
     <div id="error_explanation">
@@ -5,17 +40,17 @@
 
       <ul>
       <% @song.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li><%= message %></li> 
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="required_field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
-  <div class="field">
+  <div class="required_field">
     <%= f.label :artist %><br>
     <%= f.text_field :artist %>
   </div>
@@ -31,11 +66,19 @@
     <%= f.label :genre %><br>
     <%= f.text_field :genre %>
   </div>
+  <div class="required_field">
+    <%= f.label :soundcloud_id %><br>
+    <%= f.text_field :soundcloud_id %>
+  </div>
+  <div class="required_field">
+    <%= f.label :soundcloud_permalink %><br>
+    <%= f.text_field :soundcloud_permalink %>
+  </div>
   <div>
     <%= f.label :playlist_id %>
     <%= f.collection_select(:playlist_id, Playlist.all, :id, :title, prompt:true) %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit("Create Song", id: 'submit') %>
   </div>
 <% end %>

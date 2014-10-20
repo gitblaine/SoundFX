@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140922192317) do
+ActiveRecord::Schema.define(version: 20141020022301) do
 
   create_table "playlists", force: true do |t|
     t.string   "title"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20140922192317) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "playlist_id"
+    t.integer  "soundcloud_id"
+    t.string   "soundcloud_permalink"
   end
 
 end
