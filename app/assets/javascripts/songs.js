@@ -22,7 +22,7 @@ $(document).on('page:change', function(evt) {
   console.log('soundcloud search clicked');
   var query = $('#soundcloud-search').val();
 
-  // Call our API using the SDK
+  // Call our API using the SDKt
   SC.get("/tracks", 
     { q: query, limit: 5 }, 
     function(tracks) {
