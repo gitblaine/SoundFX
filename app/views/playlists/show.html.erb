@@ -20,11 +20,13 @@ No Songs!
   </ul>
 </div>
 
-<div id="hidden" style="display: none;">
+<ol id="hidden" style="display: none;">
 	<% @playlist.songs.each do |song| %>
-		URL: <%= song.soundcloud_permalink %>
+		<li class="url">
+			<input type="text" value = <%= song.soundcloud_permalink %> >
+		</li>
 	<% end %>
-</div>
+</ol>
 
 <%= link_to 'Edit', edit_playlist_path(@playlist) %> |
 <%= link_to 'Back', playlists_path %>

@@ -1,8 +1,12 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-/*var tracks = @playlist.songs;
-var container = $('#soundcloud-results-pl');
+
+$("#hidden .url").each(function(tracks){
+	console.log($("#hidden .url input").val());
+});
+
+/*var container = $('#soundcloud-results-pl');
 
 // Remove any previous results
 container.empty();
@@ -30,3 +34,5 @@ function addPlayer(domEle, track) {
     ],
   });
 }*/
+
+//use each

@@ -3,10 +3,10 @@ $(document).on('page:change', function(evt) {
   // Set up the validation by attaching a click handler to our form 
   // This defines a function that will run when the button is clicked
 
-  // Hook up soundcloud search
+  /*// Hook up soundcloud search
   $('#soundcloud-search-btn').click(function() {
     console.log('soundcloud search clicked');
-  });
+  });*/
 
   $('form.new_song input#submit, form.edit_song input#submit').click(function() {
 
@@ -19,7 +19,7 @@ $(document).on('page:change', function(evt) {
 
   $('#soundcloud-search-btn').click(function(){
 
-  console.log('soundcloud search clicked');
+  //console.log('soundcloud search clicked');
   var query = $('#soundcloud-search').val();
 
   // Call our API using the SDKt
