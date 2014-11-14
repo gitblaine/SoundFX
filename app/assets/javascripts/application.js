@@ -27,7 +27,7 @@ $(document).on('page:change', function(){
 	});
 });
 
-console.log('initializing soundcloud');
+//console.log('initializing soundcloud');
 SC.initialize({
   client_id: "YOUR_CLIENT_ID"
 });

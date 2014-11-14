@@ -1,10 +1,11 @@
 class SongsController < ApplicationController
+  before_action :set_playlist
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
   # GET /songs
   # GET /songs.json
   def index
-    @songs = Song.all
+    @songs = @playlist.songs
   end
 
   # GET /songs/1
@@ -26,10 +27,11 @@ class SongsController < ApplicationController
   def create
     @song = Song.new(song_params)
 
+    @song.playlist = @playlist
     respond_to do |format|
       if @song.save
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
-        format.json { render :show, status: :created, location: @song }
+        format.html { redirect_to [@playlist, @song], notice: 'Song was successfully created.' }
+        format.json { render :show, status: :created, location: [@playlist, @song]  }
       else
         format.html { render :new }
         format.json { render json: @song.errors, status: :unprocessable_entity }
@@ -42,8 +44,8 @@ class SongsController < ApplicationController
   def update
     respond_to do |format|
       if @song.update(song_params)
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
-        format.json { render :show, status: :ok, location: @song }
+        format.html { redirect_to [@playlist, @song], notice: 'Song was successfully updated.' }
+        format.json { render :show, status: :ok, location: [@playlist, @song] }
       else
         format.html { render :edit }
         format.json { render json: @song.errors, status: :unprocessable_entity }
@@ -56,7 +58,7 @@ class SongsController < ApplicationController
   def destroy
     @song.destroy
     respond_to do |format|
-      format.html { redirect_to songs_url, notice: 'Song was successfully destroyed.' }
+      format.html { redirect_to playlist_songs_url, notice: 'Song was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,4 +73,8 @@ class SongsController < ApplicationController
     def song_params
       params.require(:song).permit(:title, :artist, :album, :time, :genre, :playlist_id, :soundcloud_id, :soundcloud_permalink)
     end
+
+    def set_playlist
+    @playlist = Playlist.find(params[:playlist_id])
+  end
 end

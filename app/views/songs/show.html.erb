@@ -30,5 +30,5 @@
   <%= @song.genre %>
 </p>
 
-<%= link_to 'Edit', edit_song_path(@song) %> |
-<%= link_to 'Back', songs_path %>
+<%= link_to 'Edit', edit_playlist_song_path(@playlist, @song) %> |
+<%= link_to 'Back', playlist_songs_path %>

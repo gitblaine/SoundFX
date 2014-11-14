@@ -18,7 +18,7 @@
 </div>
 
 </div>
-<%= form_for(@song) do |f| %>
+<%= form_for([@playlist, @song]) do |f| %>
   <% if @song.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
@@ -58,10 +58,6 @@
   <div class="required_field">
     <%= f.label :soundcloud_permalink %><br>
     <%= f.text_field :soundcloud_permalink %>
-  </div>
-  <div>
-    <%= f.label :playlist_id %>
-    <%= f.collection_select(:playlist_id, Playlist.all, :id, :title, prompt:true) %>
   </div>
   <div class="actions">
     <%= f.submit("Create Song", id: 'submit') %>

@@ -28,5 +28,7 @@ No Songs!
 	<% end %>
 </ol>
 
+<%= link_to "View Songs", playlist_songs_path(@playlist) %> |
+<%= link_to "Add Songs", new_playlist_song_path(@playlist) %> |
 <%= link_to 'Edit', edit_playlist_path(@playlist) %> |
 <%= link_to 'Back', playlists_path %>

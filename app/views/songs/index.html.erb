@@ -28,9 +28,9 @@
             No Playlist 
           <% end %>
         </td>
-        <td><%= link_to 'Show', song %></td>
-        <td><%= link_to 'Edit', edit_song_path(song) %></td>
-        <td><%= link_to 'Remove', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', playlist_song_path(@playlist, song) %></td>
+        <td><%= link_to 'Edit', edit_playlist_song_path(@playlist, song) %></td>
+        <td><%= link_to 'Destroy', playlist_song_path(@playlist, song), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Song', new_song_path %>
+<%= link_to 'New Song', new_playlist_song_path(@playlist) %>
