@@ -1,3 +1,5 @@
+$.ajaxSetup({ headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') } });
+
 $(document).on('page:change', function(evt) {
   
   // Set up the validation by attaching a click handler to our form 
@@ -22,10 +24,10 @@ $(document).on('page:change', function(evt) {
   //console.log('soundcloud search clicked');
   var query = $('#soundcloud-search').val();
 
-  // Call our API using the SDKt
+  // Call our API using the SDK
   SC.get("/tracks", 
     { q: query, limit: 5 }, 
-    function(tracks) {
+    function(tracks) { 
       // Grab the container div
       var container = $('#soundcloud-results');
       
@@ -50,7 +52,7 @@ $(document).on('page:change', function(evt) {
         // Create our player and add it to the page
         addPlayer(list_item, tracks[i]);
 
-      } // End for loop
+      }; // End for loop
     } // End callback function
   ); // End SC.get call
 
@@ -79,13 +81,13 @@ function doValidation() {
 
       if(checker.length === 0){
         $("label[for=" + selector + "]").append( "<strong> *Required Field</strong>");
-      }
-    }
+      };
+    };
 
   });
 
   return check;
-}
+};
 
 // Create and add a streamable player (using ToneDen)
 function addPlayer(domEle, track) {
@@ -121,7 +123,7 @@ function addPlayer(domEle, track) {
 }
 
 
-// Click handlers take one parameter: the event object
+/*  // Click handlers take one parameter: the event object
   function addToPlaylist(event) {
 
     var tgt = $(event.target);
@@ -155,6 +157,71 @@ function addPlayer(domEle, track) {
     // From the selected track (i.e. artist, genre, duration, title, etc)
     // I would recommend clearing out our current search results 
     // (or all of the list items that aren't the clicked one)
-  };
+  };*/
+
+function addToPlaylist(event) {
+  var tgt = $(event.target);
+  var parent = tgt.parents('.player-list-item');
+  var trackId = parent.data('track-id');
+  console.log("Clicked track ID is " + trackId);
+
+  var playlist_id = $('#hidden .playlist_id').val();
+  var url = '/playlists/' + playlist_id + '/songs';
+
+  SC.get('/tracks/' + trackId, {}, function(track) {
+    // Create our data payload. Start by just using the track object we got back from the soundcloud API
+    // as it's already in JSON format.
+    var data = track;
+
+    // Set the soundcloud_id based on the id of the track
+    data.soundcloud_id = track.id;
+    // Set the artist attribute from the user that uploaded the track
+    data.artist = track.user.username;
+    data.album = track.label_name;
+    data.soundcloud_permalink = track.permalink_url;
+    data.time = track.duration;
+    data.genre = track.genre;
+
+    
+    // Replace the results with a loading message
+    $('#soundcloud-results').html('Adding to playlist...')
+    
+    var send = $.ajax({
+      type: 'POST',
+      url: url,
+      data: {song: data},
+      dataType: 'json',
+      error: playlistAddError(XMLHttpRequest.status, XMLHttpRequest.statusText),
+      success: playlistAddSuccess(data)
+    })
+
+    // Send the Ajax Request
+    // Make sure to use the playlistAddSuccess and playlistAddFailure to handle
+    // successful and erroneous AJAX responses properly.
+    // TODO: IMPLEMENT ME
+  });
+
+};
+
+function playlistAddSuccess(response_data) {
+  console.log(response_data);
+  $('#soundcloud-results').html(
+    '<div data-alert class="alert-box success radius">' +
+      'Track ' + response_data.title + ' succesfully added to the playlist' + 
+      '<a href="#" class="close">&times;</a>' +
+    '</div>'
+  )
+};
+
+function playlistAddError(response, errors) {
+  console.log(errors);
+  $('#soundcloud-results').html(
+    '<div data-alert class="alert-box alert radius">' + 
+      'There were some errors adding the track:' + errors +
+      '<a href="#" class="close">&times;</a>' +
+    '</div>'
+  );
+};
+
 });
 
