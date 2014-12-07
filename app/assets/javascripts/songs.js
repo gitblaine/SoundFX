@@ -35,9 +35,11 @@ $(document).on('page:change', function(evt) {
       container.empty();
       
       // Loop through our track objects
-      for (var i=0; i<tracks.length; i++) {
+      for (var i = 0; i < tracks.length; i ++) {
+        
         // Create a list item to hold our players
         var list_item = $('<li>').addClass('player-list-item');
+
         // Set the data attribute so we can retrieve the track later
         list_item.data('track-id', tracks[i].id)
         list_item.data('track-permalink', tracks[i].permalink_url)
