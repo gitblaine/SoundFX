@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<br></br>
+
+<% if @playlist.songs.empty? %>
+	<div class="text-center">No Songs!</div>
+<% end %>
+
 <div class="row">
   <ul id="soundcloud-results">
     
@@ -27,8 +33,12 @@ No Songs!
 		</li>
 	<% end %>
 </ol>
+<br></br>
 
+<div class="text-center">
 <%= link_to "View Songs", playlist_songs_path(@playlist) %> |
 <%= link_to "Add Songs", new_playlist_song_path(@playlist) %> |
 <%= link_to 'Edit', edit_playlist_path(@playlist) %> |
 <%= link_to 'Back', playlists_path %>
+</div>
+<br></br>

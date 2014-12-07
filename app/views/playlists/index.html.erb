@@ -1,4 +1,11 @@
-<h1>Listing playlists</h1>
+<br></br>
+<br></br>
+<br></br>
+<h1>Your Playlists</h1>
+
+<br></br>
+<div class="row">
+  <div class="small-3 large-centered columns">
 
 <table>
   <thead>
@@ -12,14 +19,22 @@
     <% @playlists.each do |playlist| %>
       <tr>
         <td><%= playlist.title %></td>
-        <td><%= link_to 'Show', playlist %></td>
+        <td><%= link_to 'Play', playlist %></td>
         <td><%= link_to 'Edit', edit_playlist_path(playlist) %></td>
-        <td><%= link_to 'Remove', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<br></br>
+  <div class = "text-center">
+    <a href="playlists/new" class="button [small small small]" >New Playlist</a>
+  </div>
+</div>
+</div>
+</div>
 
-<br>
+<!-- <div class="text-center"><%= link_to 'New Playlist', new_playlist_path %></div> -->
 
-<%= link_to 'New Playlist', new_playlist_path %>
+
+

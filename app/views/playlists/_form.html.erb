@@ -1,3 +1,6 @@
+<br></br>
+<br></br>
+<br></br>
 <%= form_for(@playlist) do |f| %>
   <% if @playlist.errors.any? %>
     <div id="error_explanation">
@@ -11,11 +14,19 @@
     </div>
   <% end %>
 
+<div class="row">
+  <div class="small-centered columns">
+
+<div class="text-center">
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit(:class => 'button [small small small]') %>
   </div>
+</div>
+</div>
+</div>
+<br></br>
 <% end %>

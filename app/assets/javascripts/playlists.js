@@ -1,7 +1,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-$(document).on('page:change', function(evt) {
+$(document).on('page:change', function() {
 
   // Grab the container div
   var container = $('#soundcloud-results');
@@ -16,10 +16,13 @@ $(document).on('page:change', function(evt) {
 
       container.append(list_item);
 
+      var link = $( this ).val();
+
       // Create our player and add it to the page
-      addPlayer(list_item, $( this ).val());
+      addPlayer(list_item, link);
 
   }); // End callback function
+
 });
 
 function addPlayer(domEle, link) {
@@ -27,11 +30,10 @@ function addPlayer(domEle, link) {
   //console.log("player added");
   ToneDen.player.create({
     dom: domEle,
-    single: true,
-    mini: true,
     urls: [
       link
     ],
+    //onTrackFinished: playNext(),
   });
 
   // This is a bit hacky, but ToneDen doesn't give us a DOMReady event
@@ -55,4 +57,12 @@ function addPlayer(domEle, link) {
     //playlist_link.off('click').click(addToPlaylist);
   }, 200);
 }
+
+/*function playNext(){
+
+  $('.player-list-item').
+
+
+}*/
+
 
