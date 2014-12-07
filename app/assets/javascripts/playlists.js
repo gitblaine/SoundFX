@@ -1,6 +1,27 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+$(document).on('page:change', function(evt) {
+
+  // Grab the container div
+  var container = $('#soundcloud-results');
+        
+  // Remove any previous results
+  container.empty();
+
+  $("#hidden .url input").each(function(index) { 
+
+      // Create a list item to hold our players
+      var list_item = $('<li>').addClass('player-list-item');
+
+      container.append(list_item);
+
+      // Create our player and add it to the page
+      addPlayer(list_item, $( this ).val());
+
+  }); // End callback function
+});
+
 function addPlayer(domEle, link) {
 
   //console.log("player added");
@@ -34,25 +55,4 @@ function addPlayer(domEle, link) {
     //playlist_link.off('click').click(addToPlaylist);
   }, 200);
 }
-
-$(document).on('page:change', function(evt) {
-
-  // Grab the container div
-  var container = $('#soundcloud-results');
-        
-  // Remove any previous results
-  container.empty();
-
-  $("#hidden .url input").each(function(index) { 
-
-      // Create a list item to hold our players
-      var list_item = $('<li>').addClass('player-list-item');
-
-      container.append(list_item);
-
-      // Create our player and add it to the page
-      addPlayer(list_item, $( this ).val());
-
-  }); // End callback function
-});
 
