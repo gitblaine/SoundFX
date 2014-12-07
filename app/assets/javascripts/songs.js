@@ -151,7 +151,7 @@ function addPlayer(domEle, track) {
     $("#song_soundcloud_permalink").val(trackPermalink);
     $("#song_artist").val(JSON.stringify(trackUser));
     $("#song_album").val(trackAlbum);
-    $("#song_time").val(trackDur);
+    $("#song_duration").val(trackDur);
     $("#song_genre").val(trackGenre);
 
     // For simplicity sake, we can only add a single song at a time to the playlist for now
@@ -181,7 +181,9 @@ function addToPlaylist(event) {
     data.artist = track.user.username;
     data.album = track.label_name;
     data.soundcloud_permalink = track.permalink_url;
-    data.time = track.duration;
+    
+    data.duration = millisToMinutesAndSeconds(track.duration);
+    console.log(data.duration);
     data.genre = track.genre;
 
     
@@ -206,7 +208,7 @@ function addToPlaylist(event) {
 };
 
 function playlistAddSuccess(response_data) {
-  console.log(response_data);
+  //console.log(response_data);
   $('#soundcloud-results').html(
     '<div data-alert class="alert-box success radius">' +
       'Track ' + response_data.title + ' succesfully added to the playlist' + 
@@ -216,7 +218,7 @@ function playlistAddSuccess(response_data) {
 };
 
 function playlistAddError(response, errors) {
-  console.log(errors);
+  //console.log(errors);
   $('#soundcloud-results').html(
     '<div data-alert class="alert-box alert radius">' + 
       'There were some errors adding the track:' + errors +
@@ -224,6 +226,12 @@ function playlistAddError(response, errors) {
     '</div>'
   );
 };
+
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
 
 });
 
