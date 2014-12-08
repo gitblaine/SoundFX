@@ -20,11 +20,24 @@
 
 $(document).foundation();
 
+(function() {
+        var script = document.createElement("script");
+
+        script.type = "text/javascript";
+        script.async = true;
+        script.src = "//sd.toneden.io/production/toneden.loader.js"
+
+        var entry = document.getElementsByTagName("script")[0];
+        entry.parentNode.insertBefore(script, entry);
+        //console.log("Toneden loaded");
+}());
+
 $(document).on('page:change', function(){
 	
 	SC.initialize({
 		client_id: "a62d5827b18b0fa49e0e57e1dcc2788a"
 	});
+
 });
 
 //console.log('initializing soundcloud');
@@ -32,25 +45,3 @@ SC.initialize({
   client_id: "YOUR_CLIENT_ID"
 });
 
-// Load the ToneDen JavaScripts (https://github.com/ToneDen/toneden-sdk)
-(function() {
-  var script = document.createElement("script");
-
-  script.type = "text/javascript";
-  script.async = true;
-  script.src = "//sd.toneden.io/production/toneden.loader.js"
-
-  var entry = document.getElementsByTagName("script")[0];
-  entry.parentNode.insertBefore(script, entry);
-}());
-
-/*
-$(document).on('page:change;' function,(evt)){
-	$(document).foundation();
-	init();
-});
-*/
-
-function init(){
-	console.log('ready!');
-}

@@ -1,9 +1,13 @@
 <br></br>
 <br></br>
-<h2>Sign up</h2>
+<h2>Sign Up</h2>
+<br>
+<!-- <div class="text-center">
+	<%= render "devise/shared/links" %>
+</div> -->
 <br>
 
-<div class="row text-center">
+<div class="row">
   <div class="large-centered columns">
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -17,11 +21,10 @@
 
   <div><%= f.label :password_confirmation , :class => 'myHeading' %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  <br>
 
-  <div><%= f.submit("Sign up", :class => 'button [small small small]') %></div>
+  <div class="text-center myHeading"><%= f.submit("Sign up", :class => 'button [small small small]') %></div>
 <% end %>
-<br>
-<%= render "devise/shared/links" %>
-<br>
+
 </div>
 </div>

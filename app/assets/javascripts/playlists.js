@@ -3,66 +3,126 @@
 
 $(document).on('page:change', function() {
 
-  // Grab the container div
-  var container = $('#soundcloud-results');
-        
-  // Remove any previous results
-  container.empty();
+  var playlistID = $("#hidden .playlist_id input").val();
 
-  $("#hidden .url input").each(function(index) { 
+  var links = [];
 
-      // Create a list item to hold our players
-      var list_item = $('<li>').addClass('player-list-item');
+  $("#hidden .url input").each(function(index) {
 
-      container.append(list_item);
-
-      var link = $( this ).val();
-
-      // Create our player and add it to the page
-      addPlayer(list_item, link);
+    links.push($(this).val());
 
   }); // End callback function
 
-});
+  if(window.location.pathname == '/playlists/' + playlistID) {
 
-function addPlayer(domEle, link) {
+    //console.log("whoa");
+    //console.log(playlistID);
 
-  //console.log("player added");
-  ToneDen.player.create({
-    dom: domEle,
-    urls: [
-      link
-    ],
-    //onTrackFinished: playNext(),
+    // Grab the container div
+    var container = $('#soundcloud-results');
+    
+    // Remove any previous results
+    container.empty();
+
+    // Create a list item to hold our players
+    var player = $('<li>').addClass('player-list-item');
+    
+    container.append(player);
+
+    var count = 0;
+
+    addPlaylistPlayer(container, links, count);
+
+    count ++;
+
+    $('.player').each(function () {
+      console.log('called');
+      console.log(ToneDen.player.getInstanceByDom('.player').getTrack());
+    });
+
+    //playerSelected();
+
+    function addPlaylistPlayer(domEle, links, count) {
+
+      // too tired to fix this right now. harcoding this for now
+      if(count > 0){
+        return;
+      }
+
+      else{
+      
+        //console.log("player added");
+        ToneDen.player.create({
+          dom: domEle,
+          urls: links,
+          keyboardEvents: true,
+          shrink: false
+          //onTrackFinished: playNext(),
+        });
+
+        //console.log(links);
+
+        // This is a bit hacky, but ToneDen doesn't give us a DOMReady event
+        // And the trackReady event doesn't fire if the track fails to load
+        var interval = setInterval(function() {
+          var playlist_link = $('.follow-link', domEle);
+          if (playlist_link.length === 0) {
+            return;
+          }
+          else {
+            clearInterval(interval);
+          }
+          // Hijack the "follow" link to use our playlist functionality instead
+          //playlist_link.text('ADD TO PLAYLIST').attr('href', 'javascript:;').attr('target', '');
+
+          // Make sure the playlist link takes up the full available space
+          //playlist_link.parent().removeClass('tdlarge-6').addClass('tdlarge-12');
+
+
+          // Add our own event handler (and remove the default one)
+          //playlist_link.off('click').click(addToPlaylist);
+        }, 200);
+      }
+    };
+  };
+
+  // playlist validate
+  $('input.button').click(function() {
+    // Check if the form is valid
+    console.log('clicked');
+    var valid = doValidation();
+    return valid;
   });
 
-  // This is a bit hacky, but ToneDen doesn't give us a DOMReady event
-  // And the trackReady event doesn't fire if the track fails to load
-  var interval = setInterval(function() {
-    var playlist_link = $('.follow-link', domEle);
-    if (playlist_link.length === 0) {
-      return;
-    }
-    else {
-      clearInterval(interval);
-    }
-    // Hijack the "follow" link to use our playlist functionality instead
-    //playlist_link.text('ADD TO PLAYLIST').attr('href', 'javascript:;').attr('target', '');
+  function doValidation() {
 
-    // Make sure the playlist link takes up the full available space
-    playlist_link.parent().removeClass('tdlarge-6').addClass('tdlarge-12');
+    // If the form is valid, return true
+    // Otherwise return false
+    // We can get all the inputs in the form by doing the following:
+    // $('input')
+    // And loop through them using an each loop (http://api.jquery.com/each/)
+    //console.log("send to func");
 
+    var check = true;
 
-    // Add our own event handler (and remove the default one)
-    //playlist_link.off('click').click(addToPlaylist);
-  }, 200);
-}
+    $('input#playlist_title').each(function(){
 
-/*function playNext(){
+      console.log($(this).val());
 
-  $('.player-list-item').
+      if($(this).val() == ""){
+        check = false;
+        var selector = $(this).attr("id");
 
+        var checker = $("label[for=" + selector + "] strong");
 
-}*/
+        if(checker.length === 0){
+          $("label[for=" + selector + "]").append( "<strong> *Cannot be empty</strong>");
+        };
+      };
 
+    });
+
+    return check;
+  };
+});
 

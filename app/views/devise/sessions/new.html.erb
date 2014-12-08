@@ -1,9 +1,13 @@
 <br></br>
 <br></br>
-<h2>Log in</h2>
+<h2>Log In</h2>
+<br>
+<!-- <div class="text-center">
+	<%= render "devise/shared/links" %>
+</div> -->
 <br></br>
 
-<div class="row text-center">
+<div class="row">
   <div class="large-centered columns">
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -14,14 +18,17 @@
     <%= f.password_field :password, autocomplete: "off" %></div>
 
   <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+    <div class="text-center"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
   <% end -%>
 
-  <div><%= f.submit("Log in", :class => 'button [tiny small large]') %></div>
+  <br>
+  <div class="text-center myHeading"><%= f.submit("Log in", :class => 'button [tiny small large]') %></div>
 <% end %>
 
-<br></br>
-<%= render "devise/shared/links" %>
-<br></br>
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <div class="text-center"><%= link_to "Forgot your password?", new_password_path(resource_name) %><br /></div>
+<% end -%>
+
+
 </div>
 </div>

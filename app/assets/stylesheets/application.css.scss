@@ -26,6 +26,15 @@ li.player-list-item {
   display:none;
 }  
 
+li.player-list-item {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+
+.player-list-item .td.player .buy-link {
+  display:none;
+}  
+
 h1 {
 	text-align: center !important;
 

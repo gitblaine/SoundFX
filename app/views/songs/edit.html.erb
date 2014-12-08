@@ -1,7 +1,10 @@
 <br></br>
 <br></br>
-<br></br>
-<h1>Editing song</h1>
+<h2>Editing Song</h2>
+<div class="text-center">
+<%= link_to 'Show', playlist_song_path(@playlist, @song) %> |
+<%= link_to 'Back', playlist_songs_path %>
+</div>
 <br></br>
 
 </div>
@@ -21,7 +24,7 @@
 <div class="row">
   <div class="small-centered columns">
 
-<div class="text-center">
+
   <div class="required_field">
     <%= f.label :title , :class => 'myHeading' %><br>
     <%= f.text_field :title %>
@@ -54,14 +57,11 @@
   <div class="actions">
     <%= f.submit(id: 'submit', :class => 'button [small small small]') %>
   </div>
-</div>
+
 </div>
 </div>
 <% end %>
 <br></br>
 
-<div class="text-center">
-<%= link_to 'Show', playlist_song_path(@playlist, @song) %> |
-<%= link_to 'Back', playlist_songs_path %>
-</div>
+
 <br></br>
