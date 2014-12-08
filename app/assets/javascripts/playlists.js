@@ -5,6 +5,14 @@ $(document).on('page:change', function() {
 
   var playlistID = $("#hidden .playlist_id input").val();
 
+  var shuffleCheck = 0;
+
+/*  if(window.location.pathname == '/playlists/' + playlistID) {
+    killAllPlayers();
+  }*/
+
+  //else{
+
   var links = [];
 
   $("#hidden .url input").each(function(index) {
@@ -13,7 +21,16 @@ $(document).on('page:change', function() {
 
   }); // End callback function
 
+  var count = 0;
+
   if(window.location.pathname == '/playlists/' + playlistID) {
+
+  // too tired to fix this right now. harcoding this for now
+  if(count > 0 && shuffleCheck > 1){
+    return;
+  }
+
+  else{
 
     //console.log("whoa");
     //console.log(playlistID);
@@ -29,23 +46,40 @@ $(document).on('page:change', function() {
     
     container.append(player);
 
-    var count = 0;
+    addPlaylistPlayer(container, links, count, shuffleCheck);
 
-    addPlaylistPlayer(container, links, count);
+    $('.player').each(function () {
+      //console.log('called');
+      console.log(ToneDen.players[0].getAllTracks());//.getInstanceByDom('.player').getTrack());
+    });
+
+    $('#shuffle-button').click(function(){
+
+      shuffleCheck ++;
+
+      if(shuffleCheck == 1){
+        $(this).hide();
+      }
+
+      var shuffled = shuffle(ToneDen.players[0].getAllTracks());
+
+      killAllPlayers();
+
+      addPlaylistPlayer(container, shuffled, count, shuffleCheck);
+
+      //console.log('button clicked');
+    });
 
     count ++;
 
-    $('.player').each(function () {
-      console.log('called');
-      console.log(ToneDen.player.getInstanceByDom('.player').getTrack());
-    });
+  }
 
     //playerSelected();
 
-    function addPlaylistPlayer(domEle, links, count) {
+    function addPlaylistPlayer(domEle, links, count, shuffleCheck) {
 
       // too tired to fix this right now. harcoding this for now
-      if(count > 0){
+      if(count > 0 && shuffleCheck > 1){
         return;
       }
 
@@ -55,7 +89,7 @@ $(document).on('page:change', function() {
         ToneDen.player.create({
           dom: domEle,
           urls: links,
-          keyboardEvents: true,
+          //keyboardEvents: true,
           shrink: false
           //onTrackFinished: playNext(),
         });
@@ -124,5 +158,34 @@ $(document).on('page:change', function() {
 
     return check;
   };
+
+  function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex ;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
+  function killAllPlayers(){
+    console.log(ToneDen.players.length);
+    for(var i = 1; i < ToneDen.players.length; i++){
+      ToneDen.players[i].destroy(); 
+    }
+  }
+
+//}
+
 });
 
