@@ -1,0 +1,31 @@
+<nav class="top-bar" data-topbar="">
+  <ul class="title-area">
+
+    <li class="name">
+      <h1>
+        <a href="/">
+          SoundFX
+        </a>
+      </h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+
+    <ul class="right">
+      <li class="divider"></li>
+      <% if current_user %>
+        <li><%= link_to "Playlists", playlists_path %></a></li>
+        <li class="divider"></li>
+        <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete  %></li>
+      <% else %>
+        <li><%= link_to "Sign up", new_user_registration_path %></li>
+        <li class="divider"></li>
+        <li><%= link_to "Login", new_user_session_path  %></li>
+      <% end %>      
+    </ul>
+  </section>
+</nav>

@@ -1,0 +1,59 @@
+<br></br>
+<br></br>
+<br></br>
+
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <ul id="song-player">
+    
+  </ul>
+</div>
+
+<!-- <p>
+  <strong>Title:</strong>
+  <%= @song.title %>
+</p>
+
+<p>
+  <strong>Artist:</strong>
+  <%= @song.artist %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @song.album %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @song.duration %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @song.genre %>
+</p>
+
+<p>
+  <strong>Permalink:</strong>
+  <%= @song.soundcloud_permalink %>
+</p> -->
+
+<div id="hidden" style="display: none;">
+    <input id="url" value = <%= @song.soundcloud_permalink %> >
+    <li class="playlist_id">
+      <input type="text" value = <%= @playlist.id %> >
+    </li>
+    <li class="song_id">
+      <input type="text" value = <%= @song.id %> >
+    </li>
+</div>
+
+<br></br>
+
+<div class="text-center">
+<%= link_to 'Edit', edit_playlist_song_path(@playlist, @song) %> |
+<%= link_to 'Back', playlist_songs_path %>
+</div>
+<br></br>

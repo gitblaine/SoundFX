@@ -14,3 +14,12 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+<<<<<<< HEAD
+=======
+public/uploads
+tmp
+logs
+public/uploads
+tmp
+logs
+>>>>>>> d6e4864157f4e06b206409147fa69fc9166e9abd

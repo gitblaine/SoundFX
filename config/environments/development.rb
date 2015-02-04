@@ -34,4 +34,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+<<<<<<< HEAD
+=======
+  
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+>>>>>>> d6e4864157f4e06b206409147fa69fc9166e9abd
 end

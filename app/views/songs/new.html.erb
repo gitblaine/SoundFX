@@ -1,0 +1,21 @@
+
+
+<br></br>
+<br></br>
+<h2>New song</h2>
+<div class="text-center">
+<%= link_to 'Back', playlist_songs_path %>
+</div>
+
+<%= render 'form' %>
+<br></br>
+<br></br>
+
+<br></br>
+
+<ol id="hidden" style="display: none;">
+	<li class="playlist_id">
+		<input type="text" value = <%= @playlist.id %> >
+	</li>
+</ol>
+

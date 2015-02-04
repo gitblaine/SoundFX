@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<br></br>
+
+<h2><%= @playlist.title %></h2>
+
+<div class="text-center">
+<%= link_to "View Songs", playlist_songs_path(@playlist) %> |
+<%= link_to "Add Songs", new_playlist_song_path(@playlist) %> |
+<%= link_to 'Edit', edit_playlist_path(@playlist) %> |
+<%= link_to 'Back', playlists_path %>
+</div>
+
+<br></br>
+<% if @playlist.songs.empty? %>
+	<div class="text-center">No Songs!</div>
+	<br>
+<% end %>
+
+<div class="row">
+  <ul id="soundcloud-results">
+    
+  </ul>
+</div>
+
+<div class="text-center">
+	<a class="button" id="shuffle-button">Shuffle!</a>
+</div>
+
+<!-- <p>
+  <strong>Title:</strong>
+  <%= @playlist.title %>
+</p>
+
+<% if @playlist.songs.empty? %>
+No Songs!
+
+<% else %>
+	<% @playlist.songs.each do |song| %>
+		Title: <%= song.title %><br />
+	<% end %>
+<% end %> -->
+
+<ol id="hidden" style="display: none;">
+	<% @playlist.songs.each do |song| %>
+		<li class="url">
+			<input type="text" value = <%= song.soundcloud_permalink %> >
+		</li>
+	<% end %>
+	<li class="playlist_id">
+		<input type="text" value = <%= @playlist.id %> >
+	</li>
+</ol>
+<br></br>
+
+

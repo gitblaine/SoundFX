@@ -1,0 +1,34 @@
+<br></br>
+<br></br>
+<h2>Log In</h2>
+<br>
+<!-- <div class="text-center">
+	<%= render "devise/shared/links" %>
+</div> -->
+<br></br>
+
+<div class="row">
+  <div class="large-centered columns">
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div><%= f.label :email , :class => 'myHeading' %><br />
+  <%= f.email_field :email, autofocus: true %></div>
+
+  <div><%= f.label :password , :class => 'myHeading' %><br />
+    <%= f.password_field :password, autocomplete: "off" %></div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="text-center"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+  <% end -%>
+
+  <br>
+  <div class="text-center myHeading"><%= f.submit("Log in", :class => 'button [tiny small large]') %></div>
+<% end %>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <div class="text-center"><%= link_to "Forgot your password?", new_password_path(resource_name) %><br /></div>
+<% end -%>
+
+
+</div>
+</div>
